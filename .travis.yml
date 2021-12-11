@@ -1,11 +1,24 @@
 sudo: required
 services:
-  - docker
+ - docker
 
 before_install:
-  - docker build -t travis/docker-react -f Dockerfile.dev .
+ - docker build -t travis/docker-react -f Dockerfile.dev .
 
 script:
-  - docker run -e CI=true travis/docker-react npm run test -- -- coverage
+ - docker run -e CI=true travis/docker-react npm run test -- --coverage
 
 language: generic
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: "ap-northeast-1"
+#   app: "aws-docker"
+#   env: "aws-docker-env"
+#   bucket_name: "aws-docker-automatic-generated-bucket"
+#   bucket_path: "aws-docker" # same as app name
+#   on:
+#     branch: main
+#   access_key_id: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: "$AWS_SECRET_KEY"
