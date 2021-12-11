@@ -9,6 +9,8 @@ COPY . .
 RUN npm run build
 
 FROM nginx
+# AWS elasticbeanstalk expose ports
+EXPOSE 80
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Command start nginx is default
